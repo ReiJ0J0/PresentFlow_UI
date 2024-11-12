@@ -7,40 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Placeholder for Top Bar -->
-    <div id="top-bar"></div>
+    <div id="top-bar"></div> <!-- Top Bar Content -->
+    <div id="sidebar"></div> <!-- Sidebar Content -->
+    <div id="main-content"></div> <!-- Main Content -->
+    <div id="about-system"></div> <!-- About System Content -->
+    <div id="about-us"></div> <!-- About Us Content -->
 
-    <!-- Placeholder for Sidebar -->
-    <div id="sidebar"></div>
-
-    <!-- Main Content Area -->
-    <main class="main-content" id="main-content">
-        <h2>Presentations</h2>
-        <div style="border: 1px solid #ccc; height: 400px; background-color: white;">
-            <!-- Placeholder for presentations -->
-        </div>
-        
-        <!-- More About PresentFlow Section -->
-        <div id="more-about"></div>
-        
-        <!-- About Us Section -->
-        <div id="about-us"></div>
-    </main>
-
-    <script>
-        function loadHTMLComponent(id, file) {
-            fetch(file)
-                .then(response => response.ok ? response.text() : Promise.reject('Failed to load'))
-                .then(data => document.getElementById(id).innerHTML = data)
-                .catch(error => console.error(`Error loading ${file}: ${error}`));
-        }
-
-        // Load each component
-        loadHTMLComponent("top-bar", "topbar.html");
-        loadHTMLComponent("sidebar", "sidebar.html");
-        loadHTMLComponent("main-content", "maincontent.html");
-        loadHTMLComponent("more-about", "moreabout.html");
-        loadHTMLComponent("about-us", "aboutus.html");
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
