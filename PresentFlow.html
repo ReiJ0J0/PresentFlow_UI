@@ -5,29 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PresentFlow</title>
     <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Placeholder for Top Bar -->
+    <div id="top-bar"></div>
+
+    <!-- Placeholder for Sidebar -->
+    <div id="sidebar"></div>
+
+    <!-- Main Content Area -->
+    <main class="main-content" id="main-content">
+        <h2>Presentations</h2>
+        <div style="border: 1px solid #ccc; height: 400px; background-color: white;">
+            <!-- Placeholder for presentations -->
+        </div>
+        
+        <!-- More About PresentFlow Section -->
+        <div id="more-about"></div>
+        
+        <!-- About Us Section -->
+        <div id="about-us"></div>
+    </main>
+
     <script>
         function loadHTMLComponent(id, file) {
             fetch(file)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById(id).innerHTML = data;
-                });
+                .then(response => response.ok ? response.text() : Promise.reject('Failed to load'))
+                .then(data => document.getElementById(id).innerHTML = data)
+                .catch(error => console.error(`Error loading ${file}: ${error}`));
         }
-        window.addEventListener('DOMContentLoaded', () => {
-            loadHTMLComponent('top-bar', 'topbar.html');
-            loadHTMLComponent('sidebar', 'sidebar.html');
-            loadHTMLComponent('main-content', 'maincontent.html');
-            loadHTMLComponent('more-about', 'aboutsystem.html');
-            loadHTMLComponent('about-us', 'aboutus.html');
-        });
+
+        // Load each component
+        loadHTMLComponent("top-bar", "topbar.html");
+        loadHTMLComponent("sidebar", "sidebar.html");
+        loadHTMLComponent("main-content", "maincontent.html");
+        loadHTMLComponent("more-about", "moreabout.html");
+        loadHTMLComponent("about-us", "aboutus.html");
     </script>
-</head>
-<body>
-    <!-- Load Components -->
-    <div id="top-bar"></div>
-    <div id="sidebar"></div>
-    <div id="main-content"></div>
-    <div id="more-about"></div>
-    <div id="about-us"></div>
 </body>
 </html>
