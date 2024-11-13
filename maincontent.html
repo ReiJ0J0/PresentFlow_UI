@@ -3,13 +3,13 @@
     <p>Insert the desired file below</p>
 
     <div class="file-upload-container">
-        <!-- Drag-and-drop area -->
-        <div class="file-drop-area" id="file-drop-area">
+        <!-- Combined drag-and-drop area and file input field -->
+        <label class="file-drop-area" id="file-drop-area" for="file-upload">
             Drag & Drop your file here or click to select
-        </div>
-        <!-- File input field for selecting files -->
-        <input type="file" id="file-upload" class="file-input" onchange="handleFileChange()" style="display: block;">
-
+        </label>
+        <!-- Hidden file input field -->
+        <input type="file" id="file-upload" class="file-input" onchange="handleFileChange()" style="display: none;">
+    
         <!-- Upload button -->
         <button class="upload-button" onclick="uploadFile()" disabled id="upload-btn">Upload</button>
     </div>
