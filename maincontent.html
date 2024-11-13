@@ -1,14 +1,15 @@
 <main class="main-content">
-    <h1>Convert to Ppt</h1>
-    <p> Insert the disired file below</p>
+    <h1>Convert to PPT</h1>
+    <p>Insert the desired file below</p>
 
     <div class="file-upload-container">
         <!-- Drag-and-drop area -->
         <div class="file-drop-area" id="file-drop-area">
             Drag & Drop your file here or click to select
         </div>
-        <input type="file" id="file-upload" class="file-input" onchange="handleFileChange()">
-    
+        <!-- File input field for selecting files -->
+        <input type="file" id="file-upload" class="file-input" onchange="handleFileChange()" style="display: block;">
+
         <!-- Upload button -->
         <button class="upload-button" onclick="uploadFile()" disabled id="upload-btn">Upload</button>
     </div>
@@ -17,9 +18,8 @@
     <div style="border: 1px solid #ccc; height: 400px; background-color: white;">
         <!-- Placeholder for presentations -->
     </div>
-    <div>
-        <h1>HOW TO USE:</h1>
-    </div>
+
+    <h1>HOW TO USE:</h1>
     <div class="instructions-container">
         <div class="instruction-box">
             <h3>Step 1:</h3>
