@@ -54,12 +54,38 @@ body {
     color: #ccc;
 }
 
-/* Main Content */
+/* Main content styles */
 .main-content {
-    margin-top: 50px;
-    margin-left: 270px;
     padding: 20px;
-    min-height: 100vh;
+    margin-left: 270px;
+}
+
+/* Instructions container */
+.instructions-container {
+    display: flex;
+    gap: 20px; /* Space between boxes */
+    margin-top: 20px;
+    flex-wrap: wrap; /* Wraps boxes on smaller screens */
+}
+
+/* Instruction box styling */
+.instruction-box {
+    flex: 1 1 25%; /* Allows 3 boxes in a row, adjusting for screen size */
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.instruction-box h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.instruction-box p {
+    font-size: 16px;
+    color: #666;
 }
 
 /* Footer Section */
