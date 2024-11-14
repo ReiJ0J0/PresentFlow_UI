@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PresentFlow</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="top-bar">{% include 'components/topbar.html' %}</div>
+    <div id="sidebar">{% include 'components/sidebar.html' %}</div>
+    <div id="main-content">{% include 'components/maincontent.html' %}</div>
+    <div id="about-system">{% include 'components/aboutsystem.html' %}</div>
+    <div id="about-us">{% include 'components/aboutus.html' %}</div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
