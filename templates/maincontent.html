@@ -4,26 +4,29 @@
 
     <div class="file-upload-container">
         <!-- Combined drag-and-drop area and file input field -->
-        <label class="file-drop-area" id="file-drop-area" for="file-upload">
-            Drag & Drop your file here or click to select
-        </label>
-        <!-- Hidden file input field -->
-        <input type="file" id="file-upload" class="file-input" onchange="handleFileChange()" style="display: none;">
-    
-        <!-- Upload button -->
-        <button class="upload-button" onclick="uploadFile()" disabled id="upload-btn">Upload</button>
+        <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+            <label class="file-drop-area" id="file-drop-area" for="file-upload">
+                Drag & Drop your file here or click to select
+            </label>
+            <!-- Hidden file input field -->
+            <input type="file" id="file-upload" name="docx_file" class="file-input" onchange="handleFileChange()" style="display: none;" required>
+            
+            <!-- Upload button -->
+            <button class="upload-button" type="submit" id="upload-btn" disabled>Convert to PPT</button>
+        </form>
     </div>
 
     <h2>Presentations</h2>
     <div style="border: 1px solid #ccc; height: 400px; background-color: white;">
         <!-- Placeholder for presentations -->
+        <p id="presentation-placeholder">No presentations yet. Upload a file to create one.</p>
     </div>
 
     <h1>HOW TO USE:</h1>
     <div class="instructions-container">
         <div class="instruction-box">
             <h3>Step 1:</h3>
-            <p>Insert the desired document to the space below.</p>
+            <p>Insert the desired document into the space below.</p>
         </div>
         <div class="instruction-box">
             <h3>Step 2:</h3>

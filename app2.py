@@ -1,8 +1,10 @@
+from flask import Flask, render_template
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import os
 import re
 from docx2txt import process as doc_process
 from pptx import Presentation
+from transformers import pipeline
 import nltk
 
 app = Flask(__name__)
@@ -19,28 +21,39 @@ os.makedirs(app.config['GENERATED_FOLDER'], exist_ok=True)
 def index():
     return render_template('index.html')
 
-# Additional routes for other pages
+# Route for topbar.html
 @app.route('/topbar.html')
 def topbar():
     return render_template('topbar.html')
 
+# Route for sidebar.html
 @app.route('/sidebar.html')
 def sidebar():
     return render_template('sidebar.html')
 
+# Route for maincontent.html
 @app.route('/maincontent.html')
 def maincontent():
     return render_template('maincontent.html')
 
+# Route for aboutsystem.html
 @app.route('/aboutsystem.html')
 def aboutsystem():
     return render_template('aboutsystem.html')
 
+# Route for aboutus.html
 @app.route('/aboutus.html')
 def aboutus():
     return render_template('aboutus.html')
 
-# Route for DOCX file upload and processing
+# Define summarization pipeline here
+def get_summarizer():
+    return pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
+
+summarizer = get_summarizer()
+
+
+# New route for DOCX file upload and processing
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -74,9 +87,17 @@ def upload_file():
                            ]
         sections = extract_sections_and_content(cleaned_text, section_markers)
 
-        # Generate PPTX file from sections only
+        # Summarize the Lecture Guide section if available
+        lecture_text = sections.get("Lecture Guide", "")
+        if lecture_text:
+            summary = summarizer(lecture_text, truncation=True, min_length=140, do_sample=False)
+            summary_text = summary[0]['summary_text']
+        else:
+            summary_text = "No Lecture Guide content found for summarization."
+
+        # Generate PPTX file from sections and summary
         ppt_file_path = os.path.join(app.config['GENERATED_FOLDER'], 'generated_presentation.pptx')
-        create_ppt_with_word_limit(sections, ppt_file_path, word_limit=50)
+        create_ppt_with_word_limit(sections, summary_text, ppt_file_path, word_limit=50)
 
         # Redirect to download the generated PPTX
         return redirect(url_for('download_ppt', filename='generated_presentation.pptx'))
@@ -138,7 +159,7 @@ def extract_sections_and_content(text, section_markers):
     
     return sections
 
-def create_ppt_with_word_limit(sections, ppt_file_path, word_limit=50):
+def create_ppt_with_word_limit(sections, summary_text, ppt_file_path, word_limit=50):
     presentation = Presentation()
     
     # Add title slide
@@ -157,6 +178,11 @@ def create_ppt_with_word_limit(sections, ppt_file_path, word_limit=50):
                 slide.shapes.title.text = f"{section} (Part {i+1})" if i > 0 else section
                 slide.placeholders[1].text = chunk
 
+    # Add conclusion slide
+    slide_layout = presentation.slide_layouts[1]
+    slide = presentation.slides.add_slide(slide_layout)
+    slide.shapes.title.text = "Conclusion"
+    slide.placeholders[1].text = summary_text
     presentation.save(ppt_file_path)
 
 def chunk_text(text, word_limit):
