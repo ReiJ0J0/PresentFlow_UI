@@ -5,11 +5,11 @@
     <div class="file-upload-container">
         <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
             <label class="file-drop-area" id="file-drop-area" for="file-upload">
-                Drag & Drop your file here or click to select
+                <span id="file-name-display">Drag & Drop your file here or click to select</span>
+                
             </label>
             <!-- Hidden file input field -->
             <input type="file" id="file-upload" name="docx_file" class="file-input" onchange="handleFileChange()" style="display: none;" required>
-            
             <!-- Upload button -->
             <button class="upload-button" type="submit" id="upload-btn" disabled>Convert to PPT</button>
         </form>

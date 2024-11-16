@@ -22,20 +22,27 @@ async function loadContent() {
 // Call the function to load content when the page loads
 window.onload = loadContent;
 
-// File upload functionality
+// Call the function to load content when the page loads
 window.onload = async function () {
     await loadContent(); // Ensure content is loaded first
 
     const fileDropArea = document.getElementById('file-drop-area');
     const fileInput = document.getElementById('file-upload');
     const uploadButton = document.getElementById('upload-btn');
+    const fileNameDisplay = document.getElementById('file-name-display'); // Add this line to select the file name display element
 
-    // Enable upload button when a file is selected
+    // Enable upload button and display file name when a file is selected
     fileInput.addEventListener('change', function() {
         if (fileInput.files.length > 0) {
-            console.log("File selected:", fileInput.files[0].name);
+            const fileName = fileInput.files[0].name;
+            console.log("File selected:", fileName);
+
+            // Update the file name display
+            fileNameDisplay.textContent = `${fileName}`;
+
             uploadButton.disabled = false; // Enable the upload button
         } else {
+            fileNameDisplay.textContent = 'Drag & Drop your file here or click to select'; // Clear display if no file is selected
             uploadButton.disabled = true; // Disable button if no file
         }
     });
@@ -57,8 +64,14 @@ window.onload = async function () {
         const files = event.dataTransfer.files;
         if (files.length > 0) {
             fileInput.files = files; // Assign dropped files to the file input
+
+            const fileName = files[0].name;
+            console.log("File dropped:", fileName);
+
+            // Update the file name display
+            fileNameDisplay.textContent = `${fileName}`;
+
             uploadButton.disabled = false; // Enable the upload button
-            console.log("File dropped:", files[0].name); // Console log the file
         }
     });
 
@@ -74,3 +87,4 @@ window.onload = async function () {
         }
     }
 };
+
