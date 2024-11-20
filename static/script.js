@@ -20,9 +20,6 @@ async function loadContent() {
 }
 
 // Call the function to load content when the page loads
-window.onload = loadContent;
-
-// Call the function to load content when the page loads
 window.onload = async function () {
     await loadContent(); // Ensure content is loaded first
 
@@ -86,5 +83,28 @@ window.onload = async function () {
             alert("No file selected for upload.");
         }
     }
-};
 
+    // Modal functionality for instructions
+    const modal = document.getElementById('instructions-modal');
+    const closeModalButton = document.getElementById('close-modal-btn'); // Optional: close button for modal
+    const instructionButton = document.getElementById('instruction-button'); // The button to open modal
+
+    // Close the modal when the close button is clicked (optional)
+    if (closeModalButton) {
+        closeModalButton.addEventListener('click', () => {
+            modal.style.display = 'none'; // Hide modal
+        });
+    }
+
+    // Show the modal when the "How to Use" button is clicked
+    instructionButton.addEventListener('click', () => {
+        modal.style.display = 'flex'; // Display modal (flex for center alignment)
+    });
+
+    // Optional: Close the modal if the user clicks outside of the modal content
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none'; // Hide modal if clicked outside the content
+        }
+    });
+};

@@ -1,3 +1,4 @@
+<!-- Main Content -->
 <main class="main-content">
     <h1>Convert to PPT</h1>
     <p>Insert the desired file below</p>
@@ -6,7 +7,6 @@
         <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
             <label class="file-drop-area" id="file-drop-area" for="file-upload">
                 <span id="file-name-display">Drag & Drop your file here or click to select</span>
-                
             </label>
             <!-- Hidden file input field -->
             <input type="file" id="file-upload" name="docx_file" class="file-input" onchange="handleFileChange()" style="display: none;" required>
@@ -14,27 +14,35 @@
             <button class="upload-button" type="submit" id="upload-btn" disabled>Convert to PPT</button>
         </form>
     </div>
-    
 
-    <h2>Presentation</h2>
+    <h2>Presentation <button id="instruction-button">How to Use</button></h2>
     <div style="border: 1px solid #ccc; height: 400px; background-color: white; border-radius: 14px;">
         <!-- Placeholder for presentations -->
         <p id="presentation-placeholder">No presentations yet. Upload a file to create one.</p>
     </div>
 
-    <h1>HOW TO USE:</h1>
-    <div class="instructions-container">
-        <div class="instruction-box">
-            <h3>Step 1:</h3>
-            <p>Insert the desired document into the space below.</p>
-        </div>
-        <div class="instruction-box">
-            <h3>Step 2:</h3>
-            <p>Process the document to convert it into a presentation.</p>
-        </div>
-        <div class="instruction-box">
-            <h3>Step 3:</h3>
-            <p>Download or preview the generated presentation.</p>
+    <!-- How to Use Button (Subtle) -->
+    <button id="instruction-button">How to Use</button>
+
+    <!-- Instructions Modal -->
+    <div id="instructions-modal">
+        <div id="modal-content">
+            <button id="close-modal-btn">&times;</button>
+            <h2>How to Use the System</h2>
+            <div class="instructions-container">
+                <div class="instruction-box">
+                    <h3>Step 1: Upload Your File</h3>
+                    <p>Select or drag and drop a file to upload your Self Learning Module (SLM) to be converted into a PowerPoint presentation.</p>
+                </div>
+                <div class="instruction-box">
+                    <h3>Step 2: Select Desired Format</h3>
+                    <p>Choose the file format (DOCX, PDF, etc.) that you would like to convert for presentation.</p>
+                </div>
+                <div class="instruction-box">
+                    <h3>Step 3: Download Your Presentation</h3>
+                    <p>Once you’re happy with the result, click to download your PowerPoint presentation for use in your course.</p>
+                </div>
+            </div>
         </div>
     </div>
 </main>
